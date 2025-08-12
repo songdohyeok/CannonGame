@@ -9,6 +9,16 @@ public class Point {
         this.y = y;
     }
 
+    // Vector2D와의 연산을 위한 메서드 (위치와 속도를 자연스럽게 다루기 위함)
+    public Point add(Vector2D vector) {
+        return new Point(x + vector.getX(), y + vector.getY());
+    }
+
+    public Vector2D subtract(Point other) {
+        return new Vector2D(x - other.x, y - other.y);
+    }
+
+
     public double getX() {
         return x;
     }
