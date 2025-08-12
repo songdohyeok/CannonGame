@@ -13,11 +13,19 @@ public class BallTest {
     }
 
     @Test
-    public void testConstructor() {
-        assertEquals(100, ball.getX());
-        assertEquals(100, ball.getY());
-        assertEquals(20, ball.getRadius());
+    public void testBallCreation() {
+        Ball ball = new Ball(new Point(100, 200), 30);
+        assertEquals(100, ball.getCenter().getX());
+        assertEquals(200, ball.getCenter().getY());
+        assertEquals(30, ball.getRadius());
     }
+
+    @Test
+    public void testBallArea() {
+        Ball ball = new Ball(new Point(0, 0), 10);
+        assertEquals(Math.PI * 100, ball.getArea(), 0.001);
+    }
+
 
     @Test
     public void testInvalidRadius() {
