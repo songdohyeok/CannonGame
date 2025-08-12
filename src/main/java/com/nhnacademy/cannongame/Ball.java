@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Ball {
     private Point center;
-    private double radius;
+    private final double radius;
 
     // 생성자 - 위치 지정 필수
     public Ball(Point center, double radius) {
@@ -21,7 +21,7 @@ public class Ball {
 
     public Ball(double x, double y, double radius) {
         // TODO: Point 생성하여 다른 생성자 호출
-        this(new Point((int) x, (int) y),radius);
+        this(new Point(x, y),radius);
     }
 
     // Getter 메서드

@@ -37,8 +37,8 @@ public class BallTest {
         Ball ball = new Ball(new Point(100, 200), 30);
         Point center = ball.getCenter();
         //center.getCenter().getY() -> getCenter() 임의로 삭제
-        assertEquals(100, center.getX(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
-        assertEquals(200, center.getY(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(100, center.x(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(200, center.y(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
         assertEquals(30, ball.getRadius(), 0.001, "반지름이 올바르게 설정되지 않았습니다");
     }
 
@@ -48,8 +48,8 @@ public class BallTest {
         Point originalCenter = new Point(100, 200);
         Ball ball = new Ball(originalCenter, 30);
         Point center = ball.getCenter();
-        assertEquals(100, center.getX(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
-        assertEquals(200, center.getY(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(100, center.x(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(200, center.y(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
         assertEquals(30, ball.getRadius(), 0.001, "반지름이 올바르게 설정되지 않았습니다");
     }
 
@@ -62,8 +62,8 @@ public class BallTest {
         ball.moveTo(newCenter);
 
         Point center = ball.getCenter();
-        assertEquals(150, center.getX(), 0.001, "moveTo가 올바르게 작동하지 않습니다");
-        assertEquals(175, center.getY(), 0.001, "moveTo가 올바르게 작동하지 않습니다");
+        assertEquals(150, center.x(), 0.001, "moveTo가 올바르게 작동하지 않습니다");
+        assertEquals(175, center.y(), 0.001, "moveTo가 올바르게 작동하지 않습니다");
     }
 
     @Test

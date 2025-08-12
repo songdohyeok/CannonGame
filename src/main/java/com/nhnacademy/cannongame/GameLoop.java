@@ -4,8 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class GameLoop extends AnimationTimer {
     private long lastUpdate;
-    private World world;
-    private GraphicsContext gc;
+    private final World world;
+    private final GraphicsContext gc;
 
     public GameLoop(World world, GraphicsContext gc){
         this.world = world;
@@ -36,9 +36,9 @@ public class GameLoop extends AnimationTimer {
 
     public void render(){
         //화면 지우기
-        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+        gc.clearRect(0, 0, world.getWidth(), world.getHeight());
         //배경 그리기
-        gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+        gc.fillRect(0, 0, world.getWidth(), world.getHeight());
         //모든 공 그리기
         for(Ball ball: world.getBalls()){
             if(ball instanceof PaintableBall paintableBall){

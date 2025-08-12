@@ -20,8 +20,8 @@ class MovableBallTest {
 
         // 부모 클래스 속성 확인
         Point center = newBall.getCenter();
-        assertEquals(100, center.getX(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
-        assertEquals(100, center.getY(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(100, center.x(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(100, center.y(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
         assertEquals(20, newBall.getRadius(), 0.001, "반지름이 올바르게 설정되지 않았습니다");
         assertEquals(Color.RED, newBall.getColor(), "색상이 올바르게 설정되지 않았습니다");
 
@@ -62,8 +62,8 @@ class MovableBallTest {
 
         // 0.5초 동안 이동한 거리 계산
         Point newCenter = ball.getCenter();
-        assertEquals(130.0, newCenter.getX(), 0.001, "X 방향 이동이 올바르지 않습니다"); // 100 + 60*0.5
-        assertEquals(140.0, newCenter.getY(), 0.001, "Y 방향 이동이 올바르지 않습니다"); // 100 + 80*0.5
+        assertEquals(130.0, newCenter.x(), 0.001, "X 방향 이동이 올바르지 않습니다"); // 100 + 60*0.5
+        assertEquals(140.0, newCenter.y(), 0.001, "Y 방향 이동이 올바르지 않습니다"); // 100 + 80*0.5
     }
 
     @Test
@@ -75,8 +75,8 @@ class MovableBallTest {
         zeroVelBall.move(1.0); // 1초 경과
 
         Point newCenter = zeroVelBall.getCenter();
-        assertEquals(originalCenter.getX(), newCenter.getX(), 0.001, "속도가 0일 때 X 위치가 변경되었습니다");
-        assertEquals(originalCenter.getY(), newCenter.getY(), 0.001, "속도가 0일 때 Y 위치가 변경되었습니다");
+        assertEquals(originalCenter.x(), newCenter.x(), 0.001, "속도가 0일 때 X 위치가 변경되었습니다");
+        assertEquals(originalCenter.y(), newCenter.y(), 0.001, "속도가 0일 때 Y 위치가 변경되었습니다");
     }
 
     @Test
@@ -86,8 +86,8 @@ class MovableBallTest {
         ball.move(1.0);
 
         Point newCenter = ball.getCenter();
-        assertEquals(60.0, newCenter.getX(), 0.001, "음수 X 속도 이동이 올바르지 않습니다");
-        assertEquals(70.0, newCenter.getY(), 0.001, "음수 Y 속도 이동이 올바르지 않습니다");
+        assertEquals(60.0, newCenter.x(), 0.001, "음수 X 속도 이동이 올바르지 않습니다");
+        assertEquals(70.0, newCenter.y(), 0.001, "음수 Y 속도 이동이 올바르지 않습니다");
     }
 
     @Test
@@ -129,8 +129,8 @@ class MovableBallTest {
         ball.move(1.0); // 1초 동안 이동
 
         Point newCenter = ball.getCenter();
-        assertEquals(150, newCenter.getX(), 0.001);
-        assertEquals(130, newCenter.getY(), 0.001);
+        assertEquals(150, newCenter.x(), 0.001);
+        assertEquals(130, newCenter.y(), 0.001);
     }
 
     @Test

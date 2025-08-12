@@ -10,7 +10,6 @@ public class MovableWorld extends World {
     public void update(double deltaTime) {
         // 모든 공들의 위치 업데이트
         // 각 공이 MovableBall인지 확인하고 move() 호출
-
         for(Ball ball: getBalls()){
             if (ball instanceof MovableBall movableBall){
                 movableBall.move(deltaTime);

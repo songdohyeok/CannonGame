@@ -1,8 +1,8 @@
 package com.nhnacademy.cannongame;
 
 import javafx.scene.paint.Color;
-import java.util.Vector;
 
+// 움직임 기능이 추가된 공
 public class MovableBall extends PaintableBall {
     private Vector2D velocity;
 

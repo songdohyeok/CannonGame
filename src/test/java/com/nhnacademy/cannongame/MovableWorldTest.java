@@ -41,8 +41,8 @@ public class MovableWorldTest {
 
         // 공이 이동했는지 확인
         Point newCenter = ball.getCenter();
-        assertEquals(105.0, newCenter.getX(), 0.001, "update 후 공이 X 방향으로 이동하지 않았습니다");
-        assertEquals(103.0, newCenter.getY(), 0.001, "update 후 공이 Y 방향으로 이동하지 않았습니다");
+        assertEquals(105.0, newCenter.x(), 0.001, "update 후 공이 X 방향으로 이동하지 않았습니다");
+        assertEquals(103.0, newCenter.y(), 0.001, "update 후 공이 Y 방향으로 이동하지 않았습니다");
     }
 
     @Test
@@ -60,10 +60,10 @@ public class MovableWorldTest {
 
         Point center1 = ball1.getCenter();
         Point center2 = ball2.getCenter();
-        assertEquals(110.0, center1.getX(), 0.001, "첫 번째 공의 X 이동이 올바르지 않습니다");
-        assertEquals(120.0, center1.getY(), 0.001, "첫 번째 공의 Y 이동이 올바르지 않습니다");
-        assertEquals(185.0, center2.getX(), 0.001, "두 번째 공의 X 이동이 올바르지 않습니다");
-        assertEquals(225.0, center2.getY(), 0.001, "두 번째 공의 Y 이동이 올바르지 않습니다");
+        assertEquals(110.0, center1.x(), 0.001, "첫 번째 공의 X 이동이 올바르지 않습니다");
+        assertEquals(120.0, center1.y(), 0.001, "첫 번째 공의 Y 이동이 올바르지 않습니다");
+        assertEquals(185.0, center2.x(), 0.001, "두 번째 공의 X 이동이 올바르지 않습니다");
+        assertEquals(225.0, center2.y(), 0.001, "두 번째 공의 Y 이동이 올바르지 않습니다");
     }
 
     @Test

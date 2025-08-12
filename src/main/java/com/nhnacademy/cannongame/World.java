@@ -26,12 +26,9 @@ public class World {
             throw new IllegalArgumentException("공이 null일 수 없습니다.");
         }
 
-        // 원의 중심 좌표의 x 나 y값은 반지름의 길이와 같으니 서로 빼면 0이 된다.
-        if (ball.getCenter().getX() - ball.getRadius() < 0 ||
-                ball.getCenter().getY() - ball.getRadius() < 0 ||
-                ball.getCenter().getX() + ball.getRadius() > width ||
-                ball.getCenter().getY() + ball.getRadius() > height) {
-            throw new IllegalArgumentException("공이 월드 경계를 벗어날 수 없습니다.");
+        if (!isInBounds(ball)) {
+            //throw new IllegalArgumentException("공이 월드 경계를 벗어날 수 없습니다.");
+            System.out.print("공이 월드 경계를 벗어난 상태입니다"); // 임시
         }
 
         balls.add(ball);
@@ -69,6 +66,7 @@ public class World {
     // 모든 공 화면에 그리기
     public void draw(GraphicsContext gc){
         gc.clearRect(0,0, width, height); // 배경지우기
+
         for(Ball ball: balls){
             if(ball instanceof PaintableBall paintableBall){ // 모든 공 중에서 그릴수있는 공 객체면
                 paintableBall.draw(gc);
@@ -77,12 +75,9 @@ public class World {
     }
 
     private boolean isInBounds(Ball ball){
-        if (ball.getCenter().getX() - ball.getRadius() < 0 ||
-                ball.getCenter().getY() - ball.getRadius() < 0 ||
-                ball.getCenter().getX() + ball.getRadius() > width ||
-                ball.getCenter().getY() + ball.getRadius() > height) {
-            return false;
-        }
-        return true;
+        return !(ball.getCenter().x() - ball.getRadius() < 0) &&
+                !(ball.getCenter().y() - ball.getRadius() < 0) &&
+                !(ball.getCenter().x() + ball.getRadius() > width) &&
+                !(ball.getCenter().y() + ball.getRadius() > height);
     }
 }

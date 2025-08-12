@@ -15,8 +15,8 @@ public class PaintableBallTest {
 
         // 상속받은 Ball의 속성들 확인
         Point center = ball.getCenter();
-        assertEquals(100, center.getX(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
-        assertEquals(100, center.getY(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(100, center.x(), 0.001, "X 좌표가 올바르게 설정되지 않았습니다");
+        assertEquals(100, center.y(), 0.001, "Y 좌표가 올바르게 설정되지 않았습니다");
         assertEquals(20, ball.getRadius(), 0.001, "반지름이 올바르게 설정되지 않았습니다");
 
         // PaintableBall의 고유 속성 확인
@@ -34,8 +34,8 @@ public class PaintableBallTest {
         Point newCenter = new Point(200, 300);
         paintableBall.moveTo(newCenter);
         Point center = paintableBall.getCenter();
-        assertEquals(200, center.getX(), 0.001, "상속받은 moveTo가 작동하지 않습니다");
-        assertEquals(300, center.getY(), 0.001, "상속받은 moveTo가 작동하지 않습니다");
+        assertEquals(200, center.x(), 0.001, "상속받은 moveTo가 작동하지 않습니다");
+        assertEquals(300, center.y(), 0.001, "상속받은 moveTo가 작동하지 않습니다");
 
         // contains 메서드도 사용 가능한지 확인
         assertTrue(paintableBall.contains(200, 300), "상속받은 contains가 작동하지 않습니다");
@@ -74,7 +74,7 @@ public class PaintableBallTest {
         // 적절한 메서드들이 호출되었는지 확인
         verify(gc).setFill(Color.BLUE);
         // getCenter()와 getRadius()앞에 balls. 임의로 붙임
-        verify(gc).fillOval(ball.getCenter().getX() - ball.getRadius(), ball.getCenter().getY() - ball.getRadius(), ball.getRadius() * 2, ball.getRadius() * 2);
+        verify(gc).fillOval(ball.getCenter().x() - ball.getRadius(), ball.getCenter().y() - ball.getRadius(), ball.getRadius() * 2, ball.getRadius() * 2);
     }
 
 }

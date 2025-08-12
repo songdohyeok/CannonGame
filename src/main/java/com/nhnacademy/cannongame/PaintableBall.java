@@ -3,7 +3,6 @@ package com.nhnacademy.cannongame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import static java.awt.Color.red;
 
 //Ball 상속 받고 색상정보 color(JavaFX Color 타입) 추가
 public class PaintableBall extends Ball{
@@ -47,8 +46,8 @@ public class PaintableBall extends Ball{
     public void draw(GraphicsContext gc) {
         // 공의 왼쪽 상단 좌표 계산
         Point center = getCenter();
-        double leftX = center.getX() - getRadius();
-        double topY = center.getY() - getRadius();
+        double leftX = center.x() - getRadius();
+        double topY = center.y() - getRadius();
         double diameter = getRadius() * 2;
 
         // 공 채우기
