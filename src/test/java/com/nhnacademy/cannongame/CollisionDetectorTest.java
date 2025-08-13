@@ -13,24 +13,24 @@ public class CollisionDetectorTest {
         // 왼쪽 벽 충돌 (x - radius < 0)
         CollisionDetector.WallCollision collision = CollisionDetector.checkWallCollision(ball, 0, 0, 800, 600);
         assertNotNull(collision, "벽 충돌이 감지되지 않았습니다");
-        assertEquals(CollisionDetector.Wall.LEFT, collision.getWall(), "잘못된 벽이 감지되었습니다");
-        assertEquals(5, collision.getPenetration(), 0.001, "침투 깊이가 잘못 계산되었습니다");
+        assertEquals(CollisionDetector.Wall.LEFT, collision.wall(), "잘못된 벽이 감지되었습니다");
+        assertEquals(5, collision.penetration(), 0.001, "침투 깊이가 잘못 계산되었습니다");
 
         // 오른쪽 벽 충돌
         ball.moveTo(new Point(785, 100)); // x + radius > 800
         collision = CollisionDetector.checkWallCollision(ball, 0, 0, 800, 600);
-        assertEquals(CollisionDetector.Wall.RIGHT, collision.getWall(), "오른쪽 벽 충돌이 감지되지 않았습니다");
-        assertEquals(5, collision.getPenetration(), 0.001, "오른쪽 벽 침투 깊이가 잘못되었습니다");
+        assertEquals(CollisionDetector.Wall.RIGHT, collision.wall(), "오른쪽 벽 충돌이 감지되지 않았습니다");
+        assertEquals(5, collision.penetration(), 0.001, "오른쪽 벽 침투 깊이가 잘못되었습니다");
 
         // 위쪽 벽 충돌
         ball.moveTo(new Point(100, 15)); // y - radius < 0
         collision = CollisionDetector.checkWallCollision(ball, 0, 0, 800, 600);
-        assertEquals(CollisionDetector.Wall.TOP, collision.getWall(), "위쪽 벽 충돌이 감지되지 않았습니다");
+        assertEquals(CollisionDetector.Wall.TOP, collision.wall(), "위쪽 벽 충돌이 감지되지 않았습니다");
 
         // 아래쪽 벽 충돌
         ball.moveTo(new Point(100, 585)); // y + radius > 600
         collision = CollisionDetector.checkWallCollision(ball, 0, 0, 800, 600);
-        assertEquals(CollisionDetector.Wall.BOTTOM, collision.getWall(), "아래쪽 벽 충돌이 감지되지 않았습니다");
+        assertEquals(CollisionDetector.Wall.BOTTOM, collision.wall(), "아래쪽 벽 충돌이 감지되지 않았습니다");
 
         // 충돌하지 않는 경우
         ball.moveTo(new Point(400, 300));
@@ -46,7 +46,7 @@ public class CollisionDetectorTest {
 
         // 왼쪽 벽 충돌 감지
         CollisionDetector.WallCollision collision = CollisionDetector.checkWallCollision(ball, 0, 0, 800, 600);
-        assertEquals(CollisionDetector.Wall.LEFT, collision.getWall(), "왼쪽 벽 충돌이 감지되지 않았습니다");
+        assertEquals(CollisionDetector.Wall.LEFT, collision.wall(), "왼쪽 벽 충돌이 감지되지 않았습니다");
 
         // 벽 충돌 해결
         CollisionDetector.resolveWallCollision(ball, collision);

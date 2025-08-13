@@ -1,12 +1,11 @@
 package com.nhnacademy.cannongame;
 
-//MovableWorld를 상속받아 충돌 처리 기능을 통합한 클래스
+//MovableWorld를 상속받아 충돌 처리 기능이 추가된 클래스
 public class BoundedWorld extends MovableWorld{
     public BoundedWorld(double width, double height) {
         super(width, height);
     }
 
-    //재정의 메서드
     //add(Ball ball): 공 추가될때 영역 설정
     @Override
     public void add(Ball ball){
@@ -14,17 +13,12 @@ public class BoundedWorld extends MovableWorld{
             throw new IllegalArgumentException("공이 null일 수 없습니다.");
         }
         super.add(ball);
+        if (ball instanceof BoundedBall boundedBall) {
+            boundedBall.setBounds(0, 0, getWidth(), getHeight());
+        }
     }
 
-    //메서드
-    //update(double deltaTime): 매 프레임 업데이트
-    //모든 공 이동
-    //벽과의 충돌 검사 및 처리
-    //공 간의 충돌 검사 및 처리
-
-
-    //구현 순서
-    //1.이동 단계: 모든 MovableBall의 move() 호출
+    //1.이동 단계: 모든 MovableBall의 move() 호출 (모든 공 이동)
     @Override
     public void update(double deltaTime){
         for(Ball ball: getBalls()){
@@ -33,28 +27,19 @@ public class BoundedWorld extends MovableWorld{
             }
         }
 
-        //2.벽 충돌 단계:
-        //BoundedBall인지 확인
-        //CollisionDetector.checkWallCollision() 호출
-        //충돌 시 resolveWallCollision() 호출
+        //2.벽 충돌 단계: (벽과의 충돌 검사 및 처리)
         for (Ball ball : getBalls()) {
             if (ball instanceof BoundedBall boundedBall) {
-                // 충돌 확인
+                // 충돌 체크
                 CollisionDetector.WallCollision collision =
                         CollisionDetector.checkWallCollision(boundedBall, 0, 0, getWidth(), getHeight());
-
                 // 충돌시
                 if (collision != null) {
                     CollisionDetector.resolveWallCollision(boundedBall, collision);
                 }
             }
         }
-
-        //3.공 충돌 단계:
-        //이중 루프로 모든 쌍 검사 (i < j)
-        //areColliding() 호출
-        //공 충돌시 resolveCollision() 호출
-
+        //3.공 충돌 단계: (공 간의 충돌 검사 및 처리)
         // 이중 충돌 방지
         for (int i = 0; i < getBalls().size(); i++) {
             for (int j = i + 1; j < getBalls().size(); j++) {

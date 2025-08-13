@@ -63,6 +63,13 @@ public class World {
         return height;
     }
 
+    //AdvancedCollisionApp에 사용하기 위해 추가
+    public void removeLast() {
+        if (!balls.isEmpty()) {
+            balls.removeLast();
+        }
+    }
+
     // 모든 공 화면에 그리기
     public void draw(GraphicsContext gc){
         gc.clearRect(0,0, width, height); // 배경지우기

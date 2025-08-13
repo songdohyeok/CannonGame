@@ -2,7 +2,7 @@ package com.nhnacademy.cannongame;
 
 import javafx.scene.paint.Color;
 
-// MovableBall을 상속받아 경계 충돌 처리
+// 공 자체 충돌 상태 및 경계 관리 클래스
 public class BoundedBall extends MovableBall{
 
     private double minX;
@@ -28,7 +28,7 @@ public class BoundedBall extends MovableBall{
         this.maxY = Double.MAX_VALUE;
     }
 
-    // 경계 설정 시 공의 중심이 이동 가능한 범위
+    // 공의 반지름을 고려해 중심이 이동 가능한 경계 영역
     public void setBounds(double minX, double minY, double maxX, double maxY) {
         this.minX = minX + getRadius();
         this.maxX = maxX - getRadius();
@@ -39,37 +39,30 @@ public class BoundedBall extends MovableBall{
     // move 메서드에서 경계 충돌 처리
     @Override
     public void move(double deltaTime) {
-        // 다음 위치 계산
+        // 다음 위치 계산 (다음위치 = 현재위치 + (속도 * 시간))
         Point nextPoint = getCenter().add(getVelocity().multiply(deltaTime));
 
-        // 경계가 설정된 경우에만 충돌 검사
-        // Double.MIN_VALUE와 Double.MAX_VALUE는 경계가 없음을 의미
-        // 화면 왼쪽 위가 0,0 이고 아래로 갈수록 y값이 커짐 x 0 ~ 800 y 0 ~ 600
-        setBounds(0,0,800,600);
-
+        // 경계가 설정된 경우에만 검사
         if (minX > Double.MIN_VALUE && maxX < Double.MAX_VALUE) {
-            // x가 최소 x값인 0 + 반지름 보다 작은 상태
-            if (nextPoint.x() <= minX) {
+            if (nextPoint.x() <= minX || nextPoint.x() >= maxX) { // x가 경계를 넘어가면
                 // 1. 속도 반전
                 setVelocity(new Vector2D(-getVelocity().getX(), getVelocity().getY()));
                 // 2. 위치 보정 (경계 안쪽으로)
-                nextPoint = new Point(minX, nextPoint.y());
-            }
-            else if (nextPoint.x() >= maxX){
-                setVelocity(new Vector2D(-getVelocity().getX(), getVelocity().getY()));
-                nextPoint = new Point(maxX, nextPoint.y());
+                if (nextPoint.x() <= minX){
+                    nextPoint = new Point(minX, nextPoint.y());
+                } else {
+                    nextPoint = new Point(maxX, nextPoint.y());
+                }
             }
         }
-
         if (minY > Double.MIN_VALUE && maxY < Double.MAX_VALUE) {
-            if (nextPoint.y() <= minY) {
+            if (nextPoint.y() <= minY || nextPoint.y() >= maxY) {
                 setVelocity(new Vector2D(getVelocity().getX(), -getVelocity().getY()));
-                nextPoint = new Point(nextPoint.x(), minY);
-
-            }
-            else if (nextPoint.y() >= maxY){
-                setVelocity(new Vector2D(getVelocity().getX(), -getVelocity().getY()));
-                nextPoint = new Point(nextPoint.x(), maxY);
+                if (nextPoint.y() <= minY) {
+                    nextPoint = new Point(nextPoint.x(), minY);
+                } else {
+                    nextPoint = new Point(nextPoint.x(), maxY);
+                }
             }
         }
         // 부모 클래스의 move 호출
