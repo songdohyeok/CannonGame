@@ -70,9 +70,6 @@ public class Ball {
         double ballDistance = center.distanceTo(other.getCenter());
 
         // 두 반지름의 합과 비교 (거리가 두 반지름의 합보다 작으면 충돌)
-        if(ballDistance<radius+other.getRadius()){
-            return false;
-        }
-        return true;
+        return !(ballDistance < radius + other.getRadius());
     }
 }

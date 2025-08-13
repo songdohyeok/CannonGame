@@ -20,4 +20,13 @@ public record Point(double x, double y) {
         // sqrt((x2-x1)² + (y2-y1)²)
         return Math.sqrt(dx * dx + dy * dy);
     }
+
+    // Shape 추상클래스에서 사용하기위해 추가
+    public double getX(){
+        return x;
+    }
+
+    public double getY(){
+        return y;
+    }
 }
