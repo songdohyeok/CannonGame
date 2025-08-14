@@ -1,7 +1,7 @@
 package com.nhnacademy.cannongame;
 
+// 충돌 영역의 공통된 부분을 추상화한 추상클래스
 public abstract class Bounds {
-
     public abstract double getMinX();
     public abstract double getMinY();
     public abstract double getMaxX();
@@ -31,23 +31,24 @@ public abstract class Bounds {
         return (getMinY() + getMaxY()) / 2;
     }
 
-    // 점 포함 여부
+    // 특정 좌표가 Bounds 안에 있는지 확인
     public boolean contains(Point point){
         return point.getX() >= getMinX() && point.getX() <= getMaxX()
                 && point.getY() >= getMinY() && point.getY() <= getMaxY();
     }
 
-    // 다른 Bounds 포함 여부
+    // 위 메서드를 x, y 좌표로 받음
+    public boolean contains(double x, double y) {
+        return contains(new Point(x, y));
+    }
+
+    // 다른 Bounds 전체가 이 Bounds 안에 있는지 확인
     public boolean contains(Bounds other){
         return this.contains(new Point(other.getMinX(), other.getMinY())) &&
                 this.contains(new Point(other.getMaxX(), other.getMaxY()));
     }
 
-    public boolean contains(double x, double y) {
-        return contains(new Point(x, y));
-    }
-
-    // 교차 여부
+    // 두 Bounds가 겹치는지(충돌하는지) 확인
     public boolean intersects(Bounds other){
         return !(other.getMinX() > this.getMaxX() ||
                 other.getMaxX() < this.getMinX() ||

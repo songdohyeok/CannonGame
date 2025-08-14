@@ -2,12 +2,13 @@ package com.nhnacademy.cannongame;
 
 public class Circle extends Shape{
     private final double radius;
+
     public Circle(Point position, double radius){
         super(position);
         this.radius = radius;
     }
 
-    public  Circle(double x, double y, double radius){
+    public Circle(double x, double y, double radius){
         this(new Point(x, y), radius);
     }
 

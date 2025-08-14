@@ -1,6 +1,7 @@
 package com.nhnacademy.cannongame;
 
 // 추상(상위) 클래스가 뼈대(템플릿)를 잡고 이를 유지하면서 구체(하위) 클래스에서 세부동작만 다르게 구현함 -> Template Method 패턴
+// 도형이 가지는 공통 기능을 추상화한 추상클래스
 public abstract class Shape {
     protected Point position;
 
@@ -9,9 +10,9 @@ public abstract class Shape {
     }
 
     // 추상 메서드 - 구현 없음
-    public abstract double getArea();
-    public abstract double getPerimeter(); //둘레
-    public abstract String getShapeType();
+    public abstract double getArea();// 도형의 넓이
+    public abstract double getPerimeter(); // 도형의 둘레
+    public abstract String getShapeType(); // 도형의 종류
 
     // 구체 메서드 - 구현 있음
     public Point getPosition(){
@@ -30,6 +31,8 @@ public abstract class Shape {
 
     // 정보 출력 (템플릿 메소드 패턴)
     public void displayInfo(){
-
+        System.out.println("도형의 종류: " + getShapeType());
+        System.out.println("도형의 넓이: " + getPerimeter());
+        System.out.println("도형의 위치: " + getShapeType());
     }
 }

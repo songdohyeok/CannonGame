@@ -111,12 +111,18 @@ public class Vector2DExtend extends Vector {
         return Double.hashCode(x) * 31 + Double.hashCode(y);
     }
 
-    // 영벡터, 단위벡터 생성 편의 메서드
-    public static Vector2DExtend zero() { return new Vector2DExtend(0, 0); }
-    public static Vector2DExtend unitX() { return new Vector2DExtend(1, 0); }
-    public static Vector2DExtend unitY() { return new Vector2DExtend(0, 1); }
+    // 영벡터, 단위벡터 메서드
+    public static Vector2DExtend zero() {
+        return new Vector2DExtend(0, 0);
+    }
+    public static Vector2DExtend unitX() {
+        return new Vector2DExtend(1, 0);
+    }
+    public static Vector2DExtend unitY() {
+        return new Vector2DExtend(0, 1);
+    }
 
-    // 극좌표 생성
+    // 극좌표
     public static Vector2DExtend fromPolar(double magnitude, double angle) {
         return new Vector2DExtend(magnitude * Math.cos(angle), magnitude * Math.sin(angle));
     }
