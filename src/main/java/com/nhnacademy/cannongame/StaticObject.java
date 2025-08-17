@@ -43,6 +43,7 @@ public abstract class StaticObject implements Collidable, Paintable {
 
     @Override
     public abstract void handleCollision(Collidable other);
+
     @Override
     public abstract void paint(GraphicsContext gc);
 }

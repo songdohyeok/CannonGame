@@ -15,7 +15,9 @@ public class SimpleBrick extends StaticObject implements Breakable {
         this.points = 10;
     }
 
-    public BrickType getType() { return type; }
+    public BrickType getType() {
+        return type;
+    }
 
     @Override
     public boolean isDestroyed() {
@@ -29,7 +31,9 @@ public class SimpleBrick extends StaticObject implements Breakable {
     }
 
     @Override
-    public int getPoints() { return points; }
+    public int getPoints() {
+        return points;
+    }
 
     @Override
     public void paint(GraphicsContext gc) {
@@ -42,8 +46,11 @@ public class SimpleBrick extends StaticObject implements Breakable {
 
     @Override
     public void handleCollision(Collidable other) {
-        if (other instanceof Ball) {
-            hit(1);
+        if (other instanceof Ball ball && !isDestroyed()) {
+            if (getBounds().intersects(ball.getBounds())) {  // 충돌 판정
+                hit(1);
+            }
         }
     }
 }
+

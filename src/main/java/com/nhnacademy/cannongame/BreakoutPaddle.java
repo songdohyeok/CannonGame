@@ -11,9 +11,6 @@ public class BreakoutPaddle extends Box {
         super(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_COLOR);
     }
 
-    public double getX() { return getPosition().getX(); }
-    public double getY() { return getPosition().getY(); }
-
     // 마우스 이동 목표 위치 지정
     public void setTargetX(double x, double worldWidth) {
         if (x < 0) x = 0;
@@ -34,4 +31,35 @@ public class BreakoutPaddle extends Box {
         ball.setDx(speed * Math.sin(angle));
         ball.setDy(-Math.abs(speed * Math.cos(angle))); // 항상 위로 반사
     }
+
+    // Ball과 충돌 여부 체크
+    public boolean isColliding(Ball ball) {
+        if (ball == null) return false;
+
+        double paddleLeft = getPosition().getX();
+        double paddleRight = paddleLeft + getWidth();
+        double paddleTop = getPosition().getY();
+        double paddleBottom = paddleTop + getHeight();
+
+        double ballLeft = ball.getX() - ball.getRadius();
+        double ballRight = ball.getX() + ball.getRadius();
+        double ballTop = ball.getY() - ball.getRadius();
+        double ballBottom = ball.getY() + ball.getRadius();
+
+        return paddleLeft < ballRight &&
+                paddleRight > ballLeft &&
+                paddleTop < ballBottom &&
+                paddleBottom > ballTop;
+    }
+
+    // Ball 충돌 처리
+    public void handleCollision(Ball ball) {
+        if (ball != null && isColliding(ball)) {
+            reflectBall(ball);
+        }
+    }
+
+    // 좌표 getter
+    public double getX() { return getPosition().getX(); }
+    public double getY() { return getPosition().getY(); }
 }

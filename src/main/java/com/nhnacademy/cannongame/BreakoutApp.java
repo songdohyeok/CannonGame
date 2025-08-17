@@ -59,8 +59,12 @@ public class BreakoutApp extends Application {
         // 게임 시작
         world.startGame();
 
-        // 마우스 이동으로 패들 제어
-        scene.setOnMouseMoved(event -> paddle.setTargetX(event.getX(), worldWidth));
+        // 마우스 이동으로 패들 제어, 게임 오버시 패들 멈춤
+        scene.setOnMouseMoved(event -> {
+            if (world.getGameState() == GameState.PLAYING) {
+                paddle.setTargetX(event.getX(), worldWidth);
+            }
+        });
 
         // 화면 업데이트 루프
         new javafx.animation.AnimationTimer() {
