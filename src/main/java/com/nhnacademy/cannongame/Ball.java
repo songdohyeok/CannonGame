@@ -1,10 +1,17 @@
 package com.nhnacademy.cannongame;
 
-import java.awt.*;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
-public class Ball {
+
+// 7.3 Ball 클래스 - 인터페이스 구현 -> 기존 Ball클래스에 인터페이스 추가
+public class Ball implements Paintable, Movable, Collidable{
     private Point center;
     private final double radius;
+
+    private double x, y, dx, dy;
+    private Color color;
+    private CollisionAction collisionAction;
 
     // 생성자 - 위치 지정 필수
     public Ball(Point center, double radius) {
@@ -22,6 +29,11 @@ public class Ball {
     public Ball(double x, double y, double radius) {
         // TODO: Point 생성하여 다른 생성자 호출
         this(new Point(x, y),radius);
+    }
+
+    public Ball(int x, int y, int radius, Color color) {
+        this(new Point(x, y), radius);
+        this.color = color;
     }
 
     // Getter 메서드
@@ -70,6 +82,103 @@ public class Ball {
         double ballDistance = center.distanceTo(other.getCenter());
 
         // 두 반지름의 합과 비교 (거리가 두 반지름의 합보다 작으면 충돌)
-        return !(ballDistance < radius + other.getRadius());
+        return ballDistance <= radius + other.getRadius();
+    }
+
+    public double getX() {
+        return center.x();
+    }
+
+    public void setX(double x) {
+        center = new Point(x, center.y());
+    }
+
+    public double getY() {
+        return center.y();
+    }
+
+    public void setY(double y) {
+        center = new Point(center.x(), y);
+    }
+
+    @Override
+    public void handleCollision(Collidable other) {
+        if (other == null || collisionAction == null) {
+            return;
+        }
+        switch (collisionAction) {
+            case BOUNCE -> {
+                dx = -dx;
+                dy = -dy;
+            }
+            case DESTROY -> {
+                this.collisionAction = null;
+            }
+            case STOP -> {
+                dx = 0;
+                dy = 0;
+            }
+            case PASS -> {
+
+            }
+            case CUSTOM -> {
+                // 필요시 추후 추가
+            }
+        }
+    }
+
+    public void setCollisionAction(CollisionAction collisionAction) {
+        this.collisionAction = collisionAction;
+    }
+
+    @Override
+    public CollisionAction getCollisionAction() {
+        return collisionAction;
+    }
+
+    @Override
+    public Bounds getBounds() {
+        return new CircleBounds(center, radius);
+    }
+
+    @Override
+    public boolean isColliding(Boundable other) {
+        if (other == null) return false;
+        return getBounds().intersects(other.getBounds());
+    }
+
+    @Override
+    public void move(double deltaTime) {
+        center = new Point(center.x() + dx * deltaTime, center.y() + dy * deltaTime);
+    }
+
+    @Override
+    public double getDx() {
+        return dx;
+    }
+
+    @Override
+    public double getDy() {
+        return dy;
+    }
+
+    @Override
+    public void setDx(double dx) {
+        this.dx = dx;
+    }
+
+    @Override
+    public void setDy(double dy) {
+        this.dy = dy;
+    }
+
+    @Override
+    public void paint(GraphicsContext gc) {
+        if (gc == null) return;
+        gc.setFill(color != null ? color : Color.BLACK);
+        double topLeftX = center.x() - radius;
+        double topLeftY = center.y() - radius;
+        double diameter = 2 * radius;
+        gc.fillOval(topLeftX, topLeftY, diameter, diameter);
     }
 }

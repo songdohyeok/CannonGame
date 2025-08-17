@@ -20,9 +20,9 @@ public class PaintableBall extends Ball{
         this.color = color;
     }
 
-    public PaintableBall(Point point, int y, Color red) {
+    public PaintableBall(Point point, int y, Color color) {
         super(point, y);
-        this.color = red;
+        this.color = color;
     }
 
     public PaintableBall(Point point, int i) {
@@ -31,13 +31,16 @@ public class PaintableBall extends Ball{
     }
 
     public Color getColor() {
+        if(color == null){
+            color = Color.RED; // 색상 NULL일시 기본 색 빨간색
+        }
         return color;
     }
 
     // 색상 변경 메서드
     public void setColor(Color color) {
         if (color == null) {
-            color = Color.RED; // 색상 NULL일시 기본 색 빨간색
+            throw new IllegalArgumentException("null 색상 설정은 불가능 합니다.");
         }
         this.color = color;
     }
